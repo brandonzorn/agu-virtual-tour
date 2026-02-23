@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 	<head>
-    <meta name="google-site-verification" content="vVjrK5zsn4ect8g1o4LqA3K6wxCCO-nOeGhmhHjyDMI" />
-    <meta name="yandex-verification" content="c165e289112319b6" />
-    <meta property="og:title" content="3D Тур АГУ" />
-    <meta property="og:description" content="Интерактивный 3D-тур по Адыгейскому Государственному Университету." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://goagu.top/" />
-    <meta property="og:image" content="https://goagu.top/3D_TYRdata/thumbnail.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="ru_RU" />
-    <link rel="canonical" href="https://goagu.top/" />
+		<meta name="google-site-verification" content="vVjrK5zsn4ect8g1o4LqA3K6wxCCO-nOeGhmhHjyDMI" />
+		<meta name="yandex-verification" content="c165e289112319b6" />
+		<meta property="og:title" content="3D Тур АГУ" />
+		<meta property="og:description" content="Интерактивный 3D-тур по Адыгейскому Государственному Университету." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://goagu.top/" />
+		<meta property="og:image" content="https://goagu.top/static/img/preview.png" />
+		<meta property="og:image:width" content="1280" />
+		<meta property="og:image:height" content="640" />
+		<meta property="og:locale" content="ru_RU" />
+		<link rel="canonical" href="https://goagu.top/" />
 
 		<meta charset="utf-8" />
+		<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/svg+xml" href="static/favicon/favicon.svg">
 		<title>3D Тур АГУ — Виртуальный тур по Адыгейскому государственному университету</title>
 
 		<meta name="description" content="3D тур по Адыгейскому государственному университету. Исследуйте инфраструктуру АГУ онлайн в интерактивном формате." />
@@ -30,7 +33,7 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<link rel="stylesheet" href="landing-style.css">
+		<link rel="stylesheet" href="static/css/tailwind-compiled.css" />
 		<style type="text/css">
 			@-ms-viewport { width: device-width; }
 			@media only screen and (min-device-width: 800px) { html { overflow:hidden; } }
@@ -181,50 +184,57 @@
 			}
 		</script>
 	</head>
-	<body>
-		<div id="landing" class="landing u-fade">
-			<header class="header u-glass u-blur">
-				<div class="brand">3D Тур АГУ</div>
-				<div class="actions">
-					<noscript>
-						<style>
-							#startTour { display:none; }
-						</style>
-						Для просмотра тура включите JavaScript.
-					</noscript>
-					<button id="startTour" type="button" class="u-btn">
-						Перейти к 3D туру
-					</button>
-				</div>
-			</header>
-			<main class="center">
-				<div class="card u-surface u-shadow u-blur">
-					<h1>
-						Виртуальный тур по <br>
-						Адыгейскому государственному университету
-					</h1>
-					<p>
-						3D тур по Адыгейскому государственному университету. <br>
-						Исследуйте инфраструктуру АГУ онлайн в интерактивном формате.
-					</p>
-				</div>
-			</main>
-			<footer class="footer u-glass u-blur">
-				<span>
-					Съёмка панорам — <time datetime="2024">2024 г.</time>
-				</span>
-				<span>
-					Создание тура: Александр Раков
-					(<a class="u-link" href="mailto:alrakov04@gmail.com">alrakov04@gmail.com</a>)
-				</span>
-				<span>
-					Техническая реализация: Владимир Клименко
-					(<a class="u-link" href="mailto:v.klimenko.2137@gmail.com">v.klimenko.2137@gmail.com</a>)
-				</span>
+	<body class="base">
+		<div id="landing" class="landing" role="region" aria-labelledby="landing-title">
+			<header>
+				<nav aria-label="Основная навигация">
+					<a href="/" class="brand-link">
+						<img src="static/favicon/favicon.svg" alt="Логотип" class="brand-logo">
+						<span class="brand-text">3D Тур АГУ</span>
+					</a>
+					<div>
+						<noscript>
+							<p>Для просмотра тура необходимо включить JavaScript.</p>
+						</noscript>
 
+						<button
+							id="startTour"
+							class="btn"
+							type="button"
+							aria-controls="container"
+							aria-label="Открыть виртуальный 3D тур по АГУ">
+							Перейти к 3D туру
+						</button>
+					</div>
+				</nav>
+			</header>
+			<main>
+				<section class="landing-section" aria-labelledby="landing-title">
+					<h1 id="landing-title">Виртуальный тур по Адыгейскому государственному университету</h1>
+					<p>
+						Интерактивный 3D-тур позволяет исследовать инфраструктуру
+						Адыгейского государственного университета онлайн.
+					</p>
+				</section>
+			</main>
+			<footer>
+				<section aria-label="Информация о проекте">
+					<p class="label">Съёмка панорам&nbsp; — <time datetime="2024">2024 г.</time></p>
+					<address>
+						<p>
+							<span class="label">Создание тура:</span>
+							<a class="url-text" href="mailto:alrakov04@gmail.com">Александр Раков</a>
+						</p>
+
+						<p>
+							<span class="label">Техническая реализация:</span>
+							<a class="url-text" href="mailto:v.klimenko.2137@gmail.com">Владимир Клименко</a>
+						</p>
+					</address>
+				</section>
 			</footer>
 		</div>
-		<div id="container" class="container u-fade tour-hidden">
+		<div id="container" class="hidden">
 
 			<div id="tourDIV">
 				<div id="panoDIV"></div>
@@ -241,6 +251,6 @@
 				</script>
 			</div>
 		</div>
-		<script src="landing.js"></script>
+		<script src="static/js/landing.js"></script>
 	</body>
 </html>
