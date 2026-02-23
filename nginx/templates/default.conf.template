@@ -34,12 +34,23 @@ server {
         try_files $uri $uri/ =404;
     }
 
-    location = /favicon.ico { }
+    location ~* ^/(favicon.*|apple-touch-icon.*)$ {
+        autoindex off;
+        access_log off;
+        add_header Cache-Control "public, max-age=2592000, immutable";
+        try_files /static/favicon$uri /static/favicon/favicon-32x32.png;
+    }
+
+    location /static/ {
+        autoindex off;
+        access_log off;
+        add_header Cache-Control "public, max-age=2592000, immutable";
+    }
 
     location /3D_TYRdata/ {
         autoindex off;
-        add_header Cache-Control "public, no-transform, max-age=2592000";
         access_log off;
+        add_header Cache-Control "public, no-transform, max-age=2592000";
     }
 
     access_log /var/log/nginx/access.log;
