@@ -1,0 +1,26 @@
+header {
+  @apply w-full mx-auto max-w-4xl px-6 py-6;
+}
+header nav {
+  @apply flex items-center justify-between;
+}
+
+main {
+  @apply w-full flex-1 min-h-0;
+}
+main section {
+  @apply mx-auto max-w-4xl px-6 py-10;
+}
+main h1 {
+  @apply text-balance font-extrabold leading-[1.05] text-3xl sm:text-4xl lg:text-5xl;
+}
+main p {
+  @apply mt-4 text-base sm:text-lg leading-relaxed opacity-70;
+}
+
+footer {
+  @apply w-full mx-auto max-w-4xl px-6 py-6 text-sm;
+}
+footer section {
+  @apply flex flex-col gap-2 items-start sm:items-center sm:flex-row sm:justify-between;
+}

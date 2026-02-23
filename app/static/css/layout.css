@@ -1,0 +1,7 @@
+.base {
+  @apply text-theme;
+}
+.landing {
+  @apply fixed inset-0 flex flex-col min-h-0;
+  overflow-y: auto;
+}

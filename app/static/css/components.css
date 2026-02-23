@@ -1,0 +1,21 @@
+.brand-link {
+  @apply inline-flex items-center gap-3 no-underline truncate;
+}
+.brand-text {
+  @apply text-lg font-semibold;
+}
+.brand-logo {
+  height: 2em;
+}
+
+.btn { 
+  @apply widget-theme border border-theme rounded-2xl px-4 py-2 font-semibold transition duration-300 cursor-pointer truncate;
+}
+
+.label {
+  @apply text-black/60 dark:text-white/60;
+}
+
+.url-text {
+  @apply underline opacity-70 hover:opacity-100 transition-opacity duration-200;
+}

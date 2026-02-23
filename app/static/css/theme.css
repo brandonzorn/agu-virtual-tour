@@ -1,0 +1,9 @@
+@utility text-theme {
+  @apply bg-white text-black dark:bg-black dark:text-white;
+}
+@utility widget-theme {
+    @apply bg-white text-black dark:bg-black dark:text-white;
+}
+@utility border-theme {
+    @apply border-black hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black;
+}
