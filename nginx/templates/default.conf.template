@@ -15,8 +15,9 @@ server {
     ssl_trusted_certificate /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
 
     http2 on;
-
+    
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header Alt-Svc 'h3=":${NGINX_HTTPS_PORT}"; ma=86400' always;
 
     gzip on;
     gzip_comp_level 5;
