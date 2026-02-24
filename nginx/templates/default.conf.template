@@ -1,20 +1,22 @@
+# HTTPS 443 ipv4/6 — основной сайт
 server {
+    # HTTP/2 (TCP)
     listen ${NGINX_HTTPS_PORT} ssl;
     listen [::]:${NGINX_HTTPS_PORT} ssl;
-    server_name ${NGINX_SERVER_NAME} www.${NGINX_SERVER_NAME};
+
+    # HTTP/3 (QUIC)
+    listen ${NGINX_HTTPS_PORT} quic;
+    listen [::]:${NGINX_HTTPS_PORT} quic;
+
+    server_name ${NGINX_SERVER_NAME};
 
     ssl_certificate         /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
     ssl_certificate_key     /etc/letsencrypt/live/${NGINX_SERVER_NAME}/privkey.pem;
     ssl_trusted_certificate /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
 
-    add_header
-         Strict-Transport-Security
-         "max-age=15768000; includeSubDomains"
-         always;
-
     http2 on;
 
-    root /usr/share/nginx/html;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     gzip on;
     gzip_comp_level 5;
@@ -27,6 +29,8 @@ server {
         text/javascript
         text/plain
         text/xml;
+
+    root /usr/share/nginx/html;
 
     index 3D_TYR.html index.html;
 
@@ -50,24 +54,34 @@ server {
     location /3D_TYRdata/ {
         autoindex off;
         access_log off;
-        add_header Cache-Control "public, no-transform, max-age=2592000";
+        add_header Cache-Control "public, max-age=2592000, no-transform";
     }
 
     access_log /var/log/nginx/access.log;
     error_log  /var/log/nginx/error.log;
 }
 
+# HTTPS 443 ipv4/6 — редирект с www на основной сайт
+server {
+    listen ${NGINX_HTTPS_PORT} ssl;
+    listen [::]:${NGINX_HTTPS_PORT} ssl;
+    server_name www.${NGINX_SERVER_NAME};
+
+    ssl_certificate         /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/${NGINX_SERVER_NAME}/privkey.pem;
+
+    return 301 https://${NGINX_SERVER_NAME}$request_uri;
+}
+
+# HTTPS 443 ipv4/6 — сброс соединения для других server_name
 server {
     listen ${NGINX_HTTPS_PORT} ssl default_server;
     listen [::]:${NGINX_HTTPS_PORT} ssl default_server;
     server_name _;
-
-    ssl_certificate     /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${NGINX_SERVER_NAME}/privkey.pem;
-
-    return 444;
+    ssl_reject_handshake on;
 }
 
+# HTTP 80 ipv4/6 — редирект с HTTP на HTTPS
 server {
     listen ${NGINX_HTTP_PORT};
     listen [::]:${NGINX_HTTP_PORT};
@@ -77,9 +91,12 @@ server {
         root /var/www/certbot;
     }
 
-    return 301 https://$host$request_uri;
+    location / {
+        return 301 https://${NGINX_SERVER_NAME}$request_uri;
+    }
 }
 
+# HTTP 80 ipv4/6 — сброс соединения для других server_name
 server {
     listen ${NGINX_HTTP_PORT} default_server;
     listen [::]:${NGINX_HTTP_PORT} default_server;
