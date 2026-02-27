@@ -21,10 +21,15 @@ server {
     quic_retry on;
     quic_gso on;
     
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
     add_header Alt-Svc 'h3=":${NGINX_HTTPS_PORT}"; ma=86400' always;
+    add_header Cross-Origin-Resource-Policy "same-origin" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
 
     gzip on;
+    gzip_vary on;
     gzip_comp_level 5;
     gzip_min_length 256;
     gzip_types
