@@ -25,6 +25,7 @@ server {
     add_header Cross-Origin-Resource-Policy "same-origin" always;
     add_header Content-Security-Policy 
         "default-src 'none'; 
+        style-src 'unsafe-inline';
 
         block-all-mixed-content;" 
         always;
