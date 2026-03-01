@@ -21,7 +21,7 @@ server {
     listen ${NGINX_HTTPS_PORT} quic reuseport;
     listen [::]:${NGINX_HTTPS_PORT} quic reuseport;
 
-    server_name ${NGINX_SERVER_NAME};
+    server_name ${NGINX_SERVER_NAME} www.${NGINX_SERVER_NAME};
     acme_certificate letsencrypt;
 
     ssl_certificate       $acme_certificate;
