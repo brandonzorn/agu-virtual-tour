@@ -14,6 +14,6 @@ services:
       NGINX_ACME_EMAIL: "${NGINX_ACME_EMAIL}"
     volumes:
       - ./app:/usr/share/nginx/html:ro
-      - ./acme-data:/etc/nginx/acme_letsencrypt:rw
+      - ./acme-data/letsencrypt:/etc/nginx/acme-letsencrypt
       - ./nginx/templates:/etc/nginx/templates:ro
       - ./logs:/var/log/nginx

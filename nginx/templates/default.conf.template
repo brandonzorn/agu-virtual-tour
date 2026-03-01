@@ -3,6 +3,7 @@ resolver 127.0.0.11 ipv6=off valid=300s;
 acme_issuer letsencrypt {
     uri         https://acme-v02.api.letsencrypt.org/directory;
     contact     mailto:${NGINX_ACME_EMAIL};
+    state_path  /etc/nginx/acme-letsencrypt;
     accept_terms_of_service;
 }
 
