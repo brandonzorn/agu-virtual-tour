@@ -1,5 +1,3 @@
-load_module modules/ngx_http_acme_module.so;
-
 acme_issuer letsencrypt {
     uri         https://acme-v02.api.letsencrypt.org/directory;
     contact     mailto:${NGINX_ACME_EMAIL};
