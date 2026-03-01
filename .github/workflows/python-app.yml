@@ -37,27 +37,9 @@ jobs:
             echo "▶ Pull images"
             docker compose pull
 
-            DOMAIN="${{ vars.DOMAIN }}"
-            EMAIL="${{ vars.EMAIL }}"
-            CERT_PATH="certbot/conf/live/$DOMAIN/fullchain.pem"
-
-            if [ ! -f "$CERT_PATH" ]; then
-              echo "🔐 TLS certificate not found — creating (standalone)..."
-              docker compose run --rm -p 80:80 --entrypoint certbot \
-                certbot certonly \
-                --standalone \
-                -d "$DOMAIN" \
-                -d "www.$DOMAIN" \
-                --agree-tos \
-                --email "$EMAIL" \
-                --non-interactive
-              echo "✅ Certificate created"
-            else
-              echo "✅ Certificate already exists — skipping creation"
-            fi
-
             echo "▶ Start full stack"
             NGINX_SERVER_NAME="${{ vars.DOMAIN }}" \
+            NGINX_ACME_EMAIL="${{ vars.EMAIL }}" \
             docker compose up -d
 
             echo "🧹 Docker cleanup"
