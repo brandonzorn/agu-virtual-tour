@@ -1,6 +1,6 @@
 services:
   nginx:
-    build: .
+    image: nginx:alpine
     container_name: agu-tour-nginx
     restart: unless-stopped
     ports:
@@ -14,6 +14,7 @@ services:
       NGINX_ACME_EMAIL: "${NGINX_ACME_EMAIL}"
     volumes:
       - ./app:/usr/share/nginx/html:ro
-      - ./acme-data/letsencrypt:/etc/nginx/acme-letsencrypt
+      - ./nginx/default.conf:/etc/nginx/default.conf:ro
       - ./nginx/templates:/etc/nginx/templates:ro
+      - ./acme-data/letsencrypt:/etc/nginx/acme-letsencrypt
       - ./logs:/var/log/nginx
