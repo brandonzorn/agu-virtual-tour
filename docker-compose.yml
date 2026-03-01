@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:alpine
+    build: .
     container_name: agu-tour-nginx
     restart: unless-stopped
     ports:
