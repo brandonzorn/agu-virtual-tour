@@ -28,5 +28,5 @@ server {
     ssl_certificate       $acme_certificate;
     ssl_certificate_key   $acme_certificate_key;
 
-    return 301 https://${NGINX_SERVER_NAME}$request_uri; [cite: 7]
+    return 301 https://${NGINX_SERVER_NAME}$request_uri;
 }
