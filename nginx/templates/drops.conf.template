@@ -1,0 +1,16 @@
+# HTTPS 443 ipv4/6 — сброс соединения для других server_name
+server {
+    listen ${NGINX_HTTPS_PORT} ssl default_server;
+    listen [::]:${NGINX_HTTPS_PORT} ssl default_server;
+    server_name _;
+    ssl_reject_handshake on;
+}
+
+# HTTP 80 ipv4/6 — сброс соединения для других server_name
+server {
+    listen ${NGINX_HTTP_PORT} default_server;
+    listen [::]:${NGINX_HTTP_PORT} default_server;
+    server_name _;
+
+    return 444;
+}

@@ -1,0 +1,32 @@
+# HTTP 80 ipv4/6 — редирект с HTTP на HTTPS
+server {
+    listen ${NGINX_HTTP_PORT};
+    listen [::]:${NGINX_HTTP_PORT};
+    server_name ${NGINX_SERVER_NAME} www.${NGINX_SERVER_NAME} test.${NGINX_SERVER_NAME};
+
+    access_log /var/log/nginx/acme-access.log;
+    error_log  /var/log/nginx/acme-error.log;
+
+    location / {
+        if ($host = "test.${NGINX_SERVER_NAME}") {
+            return 301 https://$host$request_uri;
+        }
+        return 301 https://${NGINX_SERVER_NAME}$request_uri;
+    }
+}
+
+# HTTPS 443 ipv4/6 — редирект с www на основной сайт
+server {
+    listen ${NGINX_HTTPS_PORT} ssl;
+    listen [::]:${NGINX_HTTPS_PORT} ssl;
+    listen ${NGINX_HTTPS_PORT} quic;
+    listen [::]:${NGINX_HTTPS_PORT} quic;
+    
+    server_name www.${NGINX_SERVER_NAME};
+
+    acme_certificate letsencrypt;
+    ssl_certificate       $acme_certificate;
+    ssl_certificate_key   $acme_certificate_key;
+
+    return 301 https://${NGINX_SERVER_NAME}$request_uri; [cite: 7]
+}
