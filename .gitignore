@@ -4,3 +4,5 @@ node_modules
 3D_TYRdata
 certs
 logs
+*.log
+.env

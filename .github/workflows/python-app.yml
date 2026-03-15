@@ -38,8 +38,6 @@ jobs:
             docker compose pull
 
             echo "▶ Start full stack"
-            NGINX_SERVER_NAME="${{ vars.DOMAIN }}" \
-            NGINX_ACME_EMAIL="${{ vars.EMAIL }}" \
             docker compose up -d
 
             echo "🧹 Docker cleanup"
