@@ -1,8 +1,10 @@
 .idea
 .vscode
 node_modules
-3D_TYRdata
+*data
+tour_sources
 certs
 logs
 *.log
+*.cache
 .env
