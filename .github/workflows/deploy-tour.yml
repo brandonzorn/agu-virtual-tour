@@ -1,4 +1,4 @@
-name: Python application
+name: Deploy Virtual Tour
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -31,7 +31,7 @@ jobs:
             docker compose down
 
             echo "▶ Update code"
-            git fetch origin --prune
+            git fetch origin master --prune
             git reset --hard origin/master
             
             echo "▶ Pull images"
