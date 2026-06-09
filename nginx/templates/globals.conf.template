@@ -11,6 +11,8 @@ acme_issuer letsencrypt {
 acme_shared_zone zone=ngx_acme_shared:1M;
 ssl_certificate_cache max=10;
 
+server_tokens off;
+
 gzip on;
 gzip_vary on;
 gzip_comp_level 5;
